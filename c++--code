@@ -1,24 +1,22 @@
-#include <iostream>
+import subprocess
 
-// Function to add two numbers
-int add(int a, int b) {
-    return a + b;
-}
+def add_git_remote(repo_path, remote_name, remote_url):
+    try:
+        # Navigate to the repository path
+        subprocess.run(["cd", repo_path], check=True)
+        
+        # Add the remote repository
+        subprocess.run(["git", "remote", "add", remote_name, remote_url], check=True)
+        
+        print(f"Remote '{remote_name}' added with URL '{remote_url}'")
+    except subprocess.CalledProcessError as e:
+        print(f"An error occurred: {e}")
 
-int main() {
-    int num1, num2, sum;
+# Example usage
+repo_path = "/path/to/your/local/repo"  # Replace with your repository path
+remote_name = "origin"
+remote_url = "https://github.com/shyyk/git-practice.git"
 
-    // Prompt the user to enter two numbers
-    std::cout << "Enter first number: ";
-    std::cin >> num1;
-    std::cout << "Enter second number: ";
-    std::cin >> num2;
-
-    // Call the add function and store the result in the sum variable
-    sum = add(num1, num2);
-
-    // Display the result
-    std::cout << "The sum of " << num1 << " and " << num2 << " is " << sum << std::endl;
-
-    return 0;
-}
+add_git_remote(repo_path, remote_name, remote_url)
+
+
